@@ -2,6 +2,9 @@ import pygame
 from constants import *
 
 def game_loop(screen):
+    clock = pygame.time.Clock()
+    dt = 0
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -9,6 +12,8 @@ def game_loop(screen):
 
         screen.fill(pygame.Color('black'))
         pygame.display.flip()
+
+        dt = clock.tick(FPS) / 1000
 
 def main():
     print("Starting Asteroids!")

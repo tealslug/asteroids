@@ -5,7 +5,7 @@ from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from shot import Shot
 
-def game_loop(screen, player, updatables, drawables, asteroids):
+def game_loop(screen, player, updatables, drawables, asteroids, shots):
     clock = pygame.time.Clock()
     dt = 0
 
@@ -22,6 +22,11 @@ def game_loop(screen, player, updatables, drawables, asteroids):
             if asteroid.hasCollidedWith(player):
                 print("Game over!")
                 return
+            for shot in shots:
+                if shot.hasCollidedWith(asteroid):
+                    shot.kill()
+                    asteroid.kill()
+                    continue
 
         for drawable in drawables:
             drawable.draw(screen)
@@ -45,7 +50,7 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     asteroidField = AsteroidField()
-    game_loop(screen, player, updatables, drawables, asteroids)
+    game_loop(screen, player, updatables, drawables, asteroids, shots)
     pygame.quit()
 
 

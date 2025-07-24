@@ -25,7 +25,7 @@ def game_loop(screen, player, updatables, drawables, asteroids, shots):
             for shot in shots:
                 if shot.hasCollidedWith(asteroid):
                     shot.kill()
-                    asteroid.kill()
+                    asteroid.split()
                     continue
 
         for drawable in drawables:
